@@ -20,9 +20,9 @@ public class TwilioServletSayResponse extends HttpServlet {
         // Gather phone response for "find square" calculation function
         Gather gather = new Gather();
         gather.setAction("/handle-key");
-        gather.setNumDigits(10);
+        gather.setNumDigits(5);
         gather.setMethod("POST");
-        Say sayInGather = new Say("Please enter a ten digit or smaller number to find its square.");
+        Say sayInGather = new Say("Please enter a number up to five digits long to find its square.");
         try {
             gather.append(sayInGather);
             twiml.append(say);
