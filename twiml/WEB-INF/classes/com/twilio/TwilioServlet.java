@@ -13,11 +13,20 @@ public class TwilioServletSayResponse extends HttpServlet {
  
     public void service(HttpServletRequest request, HttpServletResponse response) throws IOException {
  
-        // Create a TwiML response and add our friendly message.
+        // TwiML response
         TwiMLResponse twiml = new TwiMLResponse();
-        Say say = new Say("Hello Monkey");
+        Say say = new Say("Hello Caller");
+
+        // Gather phone response for "find square" calculation function
+        Gather gather = new Gather();
+        gather.setAction("/handle-key");
+        gather.setNumDigits(10);
+        gather.setMethod("POST");
+        Say sayInGather = new Say("Please enter a ten digit or smaller number to find its square.");
         try {
+            gather.append(sayInGather);
             twiml.append(say);
+            twiml.append(gather);
         } catch (TwiMLException e) {
             e.printStackTrace();
         }
